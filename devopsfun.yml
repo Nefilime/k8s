@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: devopsfun
-        image: ado22.azurecr.io/devopsfun
+        image: ado22.azurecr.io/devopsfun:90
         ports:
         - containerPort: 80
 
