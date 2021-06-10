@@ -22,10 +22,10 @@ spec:
   template:
     metadata:
       labels:
-        app: nginx
+        app: devopsfun
     spec:
       containers:
-      - name: nginx
+      - name: devopsfun
         image: ado22.azurecr.io/devopsfun
         ports:
         - containerPort: 80
