@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: test
+  labels:
+    name: test
+
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devopsfun
+  namespace: test
+spec:
+  selector:
+    matchLabels:
+      app: devopsfun
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: ado22.azurecr.io/devopsfun
+        ports:
+        - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: devopsfun-service
+  namespace: test
+spec:
+  selector:
+    app: devopsfun
+  ports:
+    - port: 80
+      targetPort: 80
+  type: LoadBalancer
+
+---
