@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}-devopsfun
-  namespace: {{ .Release.Name }}-test
+  namespace: {{ .Release.Name }}-devopsfun
 spec:
   selector:
     matchLabels:
