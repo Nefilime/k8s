@@ -40,9 +40,9 @@ stages:
           azureSubscription: 'Pay-As-You-Go (9f5e6f55-0b11-4062-9a61-94be3d06c950)'
           azureResourceGroup: 'ctlab'
           kubernetesCluster: 'AKS00'
+          namespace: 'grafana'
           command: 'install'
           chartType: 'Name'
           chartName: 'grafana/grafana'
           releaseName: 'grafana'
           overrideValues: 'service.enabled=true'
-
