@@ -6,40 +6,44 @@
 trigger:
 - main
 
+variables:
+ vmImageName: ubuntu-18.04
+
 pool:
-  vmImage: ubuntu-18.04
+  vmImageName: ubuntu-18.04
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+stages:
+- stage: Deploy
+  displayName: Deploy
+  jobs:
+    - job: Install
+      displayName: install Helm
+      pool:
+        vmImage: $(vmImageName)
+      steps:
+      - task: HelmInstaller@0
+        displayName: Install Helm
+        inputs:
+          helmVersion: '2.14.1'
+          installKubectl: true
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
-
-
-- task: HelmInstaller@0
-  displayName: Install Helm
-  inputs:
-    helmVersion: '2.14.1'
-    installKubectl: true
-
-- task: CmdLine@2
-  displayName: add helm repo
-  inputs:
-    script: |
-      helm repo add grafana https://grafana.github.io/helm-charts
+      - task: CmdLine@2
+        displayName: add helm repo
+        inputs:
+          script: |
+              helm repo add grafana https://grafana.github.io/helm-charts
       
-      helm repo update
+              helm repo update
 
-- task: HelmDeploy@0
-  inputs:
-    connectionType: 'Azure Resource Manager'
-    azureSubscription: 'Pay-As-You-Go (9f5e6f55-0b11-4062-9a61-94be3d06c950)'
-    azureResourceGroup: 'ctlab'
-    kubernetesCluster: 'AKS00'
-    command: 'install'
-    chartType: 'Name'
-    chartName: 'grafana/grafana'
-    releaseName: 'grafana-Build.BuildNumber'
+      - task: HelmDeploy@0
+        displayName: Deploy to kubernetes
+        inputs:
+          connectionType: 'Azure Resource Manager'
+          azureSubscription: 'Pay-As-You-Go (9f5e6f55-0b11-4062-9a61-94be3d06c950)'
+          azureResourceGroup: 'ctlab'
+          kubernetesCluster: 'AKS00'
+          command: 'install'
+          chartType: 'Name'
+          chartName: 'grafana/grafana'
+          releaseName: 'grafana'
+         
