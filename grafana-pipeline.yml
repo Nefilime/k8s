@@ -15,7 +15,7 @@ stages:
   displayName: Deploy
   jobs:
     - job: Install
-      displayName: install Helm
+      displayName: Deploy Grafana
       pool:
         vmImage: $(vmImageName)
       steps:
