@@ -34,4 +34,4 @@ pool:
     command: 'install'
     chartType: 'Name'
     chartName: 'grafana/grafana'
-    releaseName: 'grafana
+    releaseName: 'grafana'
