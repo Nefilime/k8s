@@ -3,14 +3,12 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-- main
+#trigger:
+#- main
 
 variables:
  vmImageName: ubuntu-18.04
 
-pool:
-  vmImageName: ubuntu-18.04
 
 stages:
 - stage: Deploy
@@ -46,4 +44,5 @@ stages:
           chartType: 'Name'
           chartName: 'grafana/grafana'
           releaseName: 'grafana'
-         
+          overrideValues: 'service.enabled=true'
+
