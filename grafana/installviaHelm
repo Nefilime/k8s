@@ -1,0 +1,26 @@
+#Install nginx controller
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.47.0/deploy/static/provider/cloud/deploy.yaml
+
+#install Grafana&Prometheus
+#Create Namespace
+kubectl create ns grafana
+
+#Save Helm values
+helm show values prometheus-community/kube-prometheus-stack > custom_values_grafana.yaml
+#I change grafana.ingress grafana.ingress.path grafana.ingress.hostsand add ini to grafana section.
+
+#It doesn't work
+grafana:
+  enabled: true
+  namespaceOverride: ""
+  grafana.ini:
+    server:
+      root_url: "http://akscluster.eastus2.cloudapp.azure.com/grafana/"
+      serve_from_sub_path: true
+
+#Install Grafana & Prometheus via Helm
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+# use -f to refer custom_values
+helm install prometheus prometheus-community/kube-prometheus-stack --set grafana.ingress.enabled=true,grafana.ingress.path=/grafana,grafana.ingress.hosts=[akscluster.eastus2.cloudapp.azure.com] --namespace grafana
