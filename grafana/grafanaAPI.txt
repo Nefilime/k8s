@@ -1,0 +1,23 @@
+
+
+curl -H "Authorization: Bearer eyJrIjoiZzVBUXZGRFhscEpjaWFpN01CbWl2YTJIblJsYW5FdWwiLCJuIjoia2V5MSIsImlkIjoxfQ==" http://akscluster.eastus2.cloudapp.azure.com/grafana/api/dashboards/home
+
+
+dashboard_data()
+
+
+curl -X POST --insecure -H "Authorization: Bearer eyJrIjoiZzVBUXZGRFhscEpjaWFpN01CbWl2YTJIblJsYW5FdWwiLCJuIjoia2V5MSIsImlkIjoxfQ==" -H "Content-Type: application/json" -d '{
+"dashboard": {
+    "id": null,
+    "title": "MyDash",
+    "tags": [ "templated" ],
+    "timezone": "browser",
+    "rows": [
+      {
+      }
+    ],
+    "schemaVersion": 6,
+    "version": 0
+  },
+  "overwrite": false
+}' http://akscluster.eastus2.cloudapp.azure.com/grafana/api/dashboards/db
