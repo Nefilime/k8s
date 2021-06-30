@@ -9,7 +9,7 @@ dashboard_data()
 curl -X POST --insecure -H "Authorization: Bearer eyJrIjoiZzVBUXZGRFhscEpjaWFpN01CbWl2YTJIblJsYW5FdWwiLCJuIjoia2V5MSIsImlkIjoxfQ==" -H "Content-Type: application/json" -d '{
 "dashboard": {
     "id": null,
-    "title": "MyDash",
+    "title": "My Custom Dash",
     "tags": [ "templated" ],
     "timezone": "browser",
     "rows": [
@@ -21,3 +21,7 @@ curl -X POST --insecure -H "Authorization: Bearer eyJrIjoiZzVBUXZGRFhscEpjaWFpN0
   },
   "overwrite": false
 }' http://akscluster.eastus2.cloudapp.azure.com/grafana/api/dashboards/db
+
+
+
+curl -X POST --insecure -H "Authorization: Bearer eyJrIjoiZzVBUXZGRFhscEpjaWFpN01CbWl2YTJIblJsYW5FdWwiLCJuIjoia2V5MSIsImlkIjoxfQ==" -H "Content-Type: application/json" -d @dash.json http://akscluster.eastus2.cloudapp.azure.com/grafana/api/dashboards/db
