@@ -632,7 +632,7 @@ grafana:
       serve_from_sub_path: true
       
 
-  adminPassword: q1w2E#R$
+  ## adminPassword: <admin password>
 
   ingress:
     ## If true, Grafana Ingress will be created
